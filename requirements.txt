@@ -1,0 +1,7 @@
+numpy>=2.0
+pillow>=10.0        # must be built with libraqm for Devanagari shaping (the PyPI wheels are)
+opencv-python-headless>=4.9
+cairocffi>=1.6      # needs the system libcairo2 (present on most Linux desktops)
+scipy>=1.11
+imageio-ffmpeg>=0.5 # bundles a static ffmpeg with libx264 + AAC
+moviepy>=2.0        # optional: handy for quick previews; the pipeline pipes frames to ffmpeg directly

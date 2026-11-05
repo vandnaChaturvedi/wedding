@@ -1,0 +1,85 @@
+{
+  "_comment": "All wedding information lives here. Edit this file and re-run `python src/main.py` to regenerate both videos. Weekdays are computed from the dates automatically.",
+
+  "groom": {
+    "title_hi": "चि.",
+    "title_en": "Chi.",
+    "name_hi": "अभिनन्दन",
+    "name_en": "Abhinandan",
+    "relation_hi": "सुपुत्र",
+    "relation_en": "S/o",
+    "father_hi": "श्री सुधा कान्त जी",
+    "father_en": "Shri Sudha Kant Ji",
+    "mother_hi": "श्रीमती इन्द्रावती जी",
+    "mother_en": "Shrimati Indravati Ji",
+    "grand_relation_hi": "पौत्र",
+    "grandfather_hi": "स्वर्गीय वशिष्ठ नारायण चौबे",
+    "grandfather_en": "Late Shri Vashishta Narayan Chaubey",
+    "family_hi": "चतुर्वेदी",
+    "family_en": "Chaturvedi"
+  },
+
+  "bride": {
+    "title_hi": "सौ.",
+    "title_en": "Sau.",
+    "name_hi": "साक्षी",
+    "name_en": "Sakshi",
+    "relation_hi": "सुपुत्री",
+    "relation_en": "D/o",
+    "father_hi": "श्री नरेन्द्र जी",
+    "father_en": "Shri Narendra Ji",
+    "mother_hi": "श्रीमती उर्मिला जी",
+    "mother_en": "Shrimati Urmila Ji",
+    "grand_relation_hi": "पौत्री",
+    "grandfather_hi": "स्वर्गीय कपिल देव शुक्ला",
+    "grandfather_en": "Late Shri Kapil Dev Shukla",
+    "family_hi": "शुक्ला",
+    "family_en": "Shukla"
+  },
+
+  "addresses": {
+    "groom_home": {
+      "label_hi": "वर निवास स्थान",
+      "label_en": "Groom's Niwas Sthan",
+      "lines_en": ["32, 96/97, Shagun Lane,", "Kiran Inclave,", "Kursi Road,", "Lucknow – 226026."]
+    },
+    "bride_home": {
+      "label_hi": "कन्या निवास स्थान",
+      "label_en": "Bride's Niwas Sthan",
+      "lines_hi": ["ग्राम – जौरहर,", "निकट मेट्रोपोलिटन स्कूल,", "मेडिकल कॉलेज रोड,", "जौरहर,", "गोरखपुर।"],
+      "lines_en": ["Village Jaurhar,", "Near Metropolitan School,", "Medical College Road,", "Jaurhar, Gorakhpur."]
+    },
+    "tilak_venue": {
+      "label_hi": "तिलक स्थल",
+      "label_en": "MD Palace",
+      "lines_en": ["MD Palace,", "Tedi Puliya Chauraha,", "Opposite Biotech Park,", "Lucknow."]
+    }
+  },
+
+  "ceremonies": [
+    {"key": "tilak",       "name_hi": "तिलक समारोह",               "name_en": "Tilak Samaroh",
+     "date": "2026-11-22", "time": "7:00 PM",  "venue": "tilak_venue"},
+    {"key": "yagyopaveet", "name_hi": "यज्ञोपवीत संस्कार",          "name_en": "Yagyopoveet Sanskaar",
+     "date": "2026-11-23", "time": "11:30 AM", "venue": "groom_home"},
+    {"key": "haldi",       "name_hi": "हल्दी समारोह",               "name_en": "Haldi Samaroh",
+     "date": "2026-11-24", "time": "11:30 AM", "venue": "groom_home"},
+    {"key": "baraat",      "name_hi": "बारात प्रस्थान",              "name_en": "Baraat Prasthan",
+     "date": "2026-11-25", "time": "12:00 PM", "venue": "groom_home"},
+    {"key": "vivaah",      "name_hi": "शुभ विवाह समारोह",            "name_en": "Shubh Vivaah Samaroh",
+     "date": "2026-11-25", "time": "10:00 PM", "venue": "bride_home"},
+    {"key": "gauna",       "name_hi": "शुभ गौना",                   "name_en": "Shubh Gauna",
+     "date": "2026-11-30", "time": null,       "venue": "bride_home"}
+  ],
+
+  "texts": {
+    "shloka": ["वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।", "निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥"],
+    "ganesh": "|| श्री गणेशाय नमः ||",
+    "blessing": "स्नेह, आशीर्वाद एवं मंगलकामनाओं सहित",
+    "invite": "आप सपरिवार सादर आमंत्रित हैं।",
+    "with_hi": "संग",
+    "families_hi": "चतुर्वेदी एवं शुक्ला परिवार",
+    "awaiting_hi": ["आपकी गरिमामयी उपस्थिति एवं शुभाशीष की", "सादर प्रतीक्षा रहेगी।"],
+    "compliments_en": "With Best Compliments",
+    "families_en": "Chaturvedi & Shukla Family"
+  }
+}

@@ -1,0 +1,10 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Rendered videos, previews and soundtracks (rebuild with `python src/main.py`)
+output/
+
+# Decoded copies of third-party songs (copyrighted; pass the original with --music)
+assets/music/
