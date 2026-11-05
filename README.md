@@ -1,4 +1,4 @@
-# Wedding Invitation Videos – Abhinandan & Sakshi
+# Wedding Invitation Videos –
 
 Three 85-second, 1080×1920 (9:16), 30 fps, H.264/AAC invitation videos are generated entirely in code:
 
