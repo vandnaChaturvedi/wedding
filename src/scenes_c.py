@@ -274,6 +274,7 @@ class CCouple(CFloral):
         sc = max(0.01, 0.8 + 0.2 * p)
         a = min(1.0, max(p, 0) * 2)
         sc *= 1.14
+        self.toran(f, t, t0=0.2)  # behind the window: fills the upper corners
         place(f, win, W / 2, 975, anchor=(0.5, 1.0), scale=sc, alpha=a)
         place(f, self.frame, W / 2, 975, anchor=(0.5, 1.0), scale=sc, alpha=a)
         self.corners(f, t, top=False, size=430, t0=0.4)
