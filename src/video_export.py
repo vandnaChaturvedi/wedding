@@ -82,10 +82,14 @@ def build_scenes(builder_name, durations=None):
     return sc
 
 
-def _init_worker(builder_name, durations=None):
-    global _TL
+_COVER_T = None
+
+
+def _init_worker(builder_name, durations=None, cover_t=None):
+    global _TL, _COVER_T
     cv2.setNumThreads(1)
     _TL = Timeline(build_scenes(builder_name, durations))
+    _COVER_T = cover_t
 
 
 def _render_chunk(args):
@@ -95,7 +99,9 @@ def _render_chunk(args):
            "-pix_fmt", "yuv420p", out_path]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     for k in range(f0, f1):
-        fr = _TL.frame(k / FPS)
+        # Frame 0 doubles as the poster: WhatsApp/galleries build the preview from the first frame,
+        # and the real opening fades in from white, so show the chosen cover moment for 1/30 s instead.
+        fr = _TL.frame(_COVER_T if (k == 0 and _COVER_T is not None) else k / FPS)
         p.stdin.write(to_uint8(fr).tobytes())
     p.stdin.close()
     p.wait()
@@ -105,14 +111,14 @@ def _render_chunk(args):
 
 
 def render_video(builder_name, out_mp4, audio_wav, workers=None, chunk_seconds=2.0, max_seconds=None,
-                 durations=None):
+                 durations=None, cover_t=None):
     tl = Timeline(build_scenes(builder_name, durations))
     n = tl.n_frames if max_seconds is None else int(max_seconds * FPS)
     workers = workers or max(1, (os.cpu_count() or 4) - 2)
     tmp = Path(tempfile.mkdtemp(prefix="wedding_"))
     per = int(chunk_seconds * FPS)
     jobs = [(i, f0, min(f0 + per, n), str(tmp / f"chunk_{i:04d}.mp4")) for i, f0 in enumerate(range(0, n, per))]
-    with ProcessPoolExecutor(workers, initializer=_init_worker, initargs=(builder_name, durations)) as ex:
+    with ProcessPoolExecutor(workers, initializer=_init_worker, initargs=(builder_name, durations, cover_t)) as ex:
         for done, _ in enumerate(ex.map(_render_chunk, jobs), 1):
             if done % 5 == 0 or done == len(jobs):
                 print(f"  [{builder_name}] chunks {done}/{len(jobs)}", flush=True)

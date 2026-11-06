@@ -102,7 +102,7 @@ def report_data(cfg):
         print(f"  {k}: {' '.join(v['lines_en'])}")
 
 
-def previews(tl, mp4, tag):
+def previews(tl, mp4, tag, cover_t=None):
     PREV.mkdir(parents=True, exist_ok=True)
     paths, labels = [], []
     for i, sc in enumerate(tl.scenes):
@@ -115,7 +115,7 @@ def previews(tl, mp4, tag):
         paths.append(p)
         labels.append(f"{i + 1}. {sc.name.split('_', 1)[1]}  @{t:.1f}s")
     contact_sheet(paths, labels, OUT / f"{tag}_contact_sheet.jpg", cols=5, thumb_w=360)
-    extract_frame(mp4, tl.starts[2] + 9.0, OUT / f"{tag}_thumbnail.jpg")
+    extract_frame(mp4, cover_t if cover_t is not None else tl.starts[2] + 9.0, OUT / f"{tag}_thumbnail.jpg")
 
 
 def main():
@@ -126,6 +126,8 @@ def main():
     ap.add_argument("--workers", type=int)
     ap.add_argument("--music", help="song file to use as the soundtrack (scenes are re-timed to its bars)")
     ap.add_argument("--out", help="output file name (with --only)")
+    ap.add_argument("--cover", type=float, metavar="SECONDS",
+                    help="moment shown as the first frame, so WhatsApp/gallery previews show it (e.g. 93.0)")
     args = ap.parse_args()
     if (args.music or args.out) and not args.only:
         sys.exit("--music/--out need --only a|b|c")
@@ -175,7 +177,7 @@ def main():
             composer(tl, str(wav))
         print(f"[{k.upper()}] rendering {tl.n_frames} frames…", flush=True)
         render_video(builder, OUT / fname, wav, workers=args.workers, max_seconds=args.seconds,
-                     durations=durations)
+                     durations=durations, cover_t=args.cover)
         print(f"[{k.upper()}] done in {time.time() - t0:.0f}s", flush=True)
         if args.seconds:
             continue
@@ -185,7 +187,7 @@ def main():
         info = [l.strip() for l in probe(OUT / fname).splitlines() if "Stream" in l or "Duration" in l]
         print("\n".join(info))
         print(f"duration {probe_duration(OUT / fname):.2f}s, size {(OUT / fname).stat().st_size / 1e6:.1f} MB")
-        previews(tl, OUT / fname, Path(fname).stem)
+        previews(tl, OUT / fname, Path(fname).stem, args.cover)
 
 
 if __name__ == "__main__":
